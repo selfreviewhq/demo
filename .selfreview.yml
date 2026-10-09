@@ -1,0 +1,7 @@
+# Selfreview settings for this repo. Read from the base branch, so a PR can't change its own review.
+instructions: |
+  This is a public link shortener. Pay extra attention to open redirects, auth checks on
+  /links routes, and anything that lets one user read or change another user's links.
+ignore: ["bun.lock"]
+min_severity: medium
+max_comments: 10
