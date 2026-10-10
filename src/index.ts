@@ -10,8 +10,8 @@ export function createApp(store = new LinkStore(), apiKey = process.env.API_KEY 
     const body = await c.req.json().catch(() => null);
     const target = parseTargetUrl(body?.url);
     if (!target) return c.json({ error: "url must be an http(s) URL" }, 400);
-    const link = store.create(target);
-    return c.json({ slug: link.slug }, 201);
+    const link = store.create(target, { slug: body?.slug, ttlSeconds: body?.ttlSeconds });
+    return c.json({ slug: link.slug, expiresAt: link.expiresAt }, 201);
   });
 
   app.get("/links/:slug/stats", requireApiKey(apiKey), (c) => {
